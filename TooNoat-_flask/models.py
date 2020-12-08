@@ -6,15 +6,17 @@ class Note(db.Model):
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))
     date = db.Column("date", db.String(50))
+    timestamp = db.Column("timestamp", db.String(50))
     # can create a foreign key; referenceing the id variable in the User class, so that is why it is lowercase u
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="note_comment", cascade="all, delete-orphan", lazy=True)
 
-    def __init__(self, title, text, date, user_id):
+    def __init__(self, title, text, date, timestamp, user_id):
         self.title = title
         self.text = text
         self.date = date
         self.user_id = user_id
+        self.timestamp = timestamp
 
 class User(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)

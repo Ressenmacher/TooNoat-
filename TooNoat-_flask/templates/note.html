@@ -25,11 +25,13 @@
                 <th>Title</th>
                 <th>Text</th>
                 <th>Date</th>
+                <th>Time</th>
             </tr>
             <tr>
                 <td>{{ note.title }}</td>
                 <td>{{ note.text }}</td>
                 <td>{{ note.date }}</td>
+                <td>{{ note.timestamp }}</td>
             </tr>
         </table>
         {% if note.comments %}

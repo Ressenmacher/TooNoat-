@@ -77,9 +77,12 @@ def new_note():
             title = request.form['title']
             text = request.form['noteText']
             from datetime import date
+            from datetime import datetime
             today = date.today()
+            now = datetime.now()
+            timestamp = now.strftime("%I:%M:%S")
             today = today.strftime("%m-%d-%Y")
-            new_record = Note(title, text, today, session['user_id'])
+            new_record = Note(title, text, today, timestamp, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
 
