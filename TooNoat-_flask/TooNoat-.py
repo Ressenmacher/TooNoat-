@@ -82,7 +82,8 @@ def new_note():
             now = datetime.now()
             timestamp = now.strftime("%I:%M:%S")
             today = today.strftime("%m-%d-%Y")
-            new_record = Note(title, text, today, timestamp, session['user_id'])
+            new_record = Note(title, text, today,
+                              timestamp, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
 
@@ -229,6 +230,17 @@ def delete_comment(note_id, comment_id):
     else:
         # user is note in session redirect to login
         return redirect(url_for('login'))
+
+
+@app.route('/notes/search', methods=['GET'])
+def search_note():
+    if session.get('user'):
+        print(request.args.get("q"))
+        my_note = db.session.query(Note).filter_by(
+            id=request.args.get("q")).one()
+
+        return redirect(url_for('get_note', note_id=my_note.id))
+        # no redirect needed, user will be redirect via other methods
 
 
 app.run(host=os.getenv('IP', '127.0.0.1'), port=int(
