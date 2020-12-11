@@ -61,6 +61,11 @@ def get_note(note_id):
         my_note = db.session.query(Note).filter_by(
             id=note_id, user_id=session['user_id']).one()
 
+        # increment view count before viewing
+        my_note.views+=1
+        db.session.add(my_note)
+        db.session.commit()
+        
         # create a comment form object
         form = CommentForm()
 
@@ -82,8 +87,9 @@ def new_note():
             now = datetime.now()
             timestamp = now.strftime("%I:%M:%S")
             today = today.strftime("%m-%d-%Y")
+            views = 0
             new_record = Note(title, text, today,
-                              timestamp, session['user_id'])
+                              timestamp, views, session['user_id'])
             db.session.add(new_record)
             db.session.commit()
 
@@ -91,8 +97,7 @@ def new_note():
         else:
             # GET request - show new note form
             # retrieve user from database
-            a_user = db.session.query(User).filter_by(
-                id=session['user_id']).one()
+            a_user = db.session.query(User).filter_by(id=session['user_id']).one()
             return render_template('new.html', user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -100,8 +105,11 @@ def new_note():
 
 @app.route('/notes/edit/<note_id>', methods=['GET', 'POST'])
 def update_note(note_id):
-    # check if a user if saved in session
+    # check if a user is saved in session
     if session.get('user'):
+    # EDIT
+    # 2nd Edit
+    # check method used for request
         if request.method == 'POST':
             # get title data
             title = request.form['title']
@@ -116,10 +124,18 @@ def update_note(note_id):
             db.session.commit()
 
             return redirect(url_for('get_notes'))
+        else:
+            # GET request - show new note form to edit note
+            # retrieve user from database
+            a_user = db.session.query(User).filter_by(id=session['user_id']).one()
+
+            # retrieve note from database
+            my_note = db.session.query(Note).filter_by(id=note_id).one()
+
+            return render_template('new.html', note=my_note, user=a_user)
     else:
-        # GET request - show new note to edit
-        # retrieve user from database
-        a_user = db.session.query(User).filter_by(id=session['user_id']).one()
+        # user is not in session redirect to login
+        return redirect(url_for('login'))
 
 
 @app.route('/notes/delete/<note_id>', methods=['POST'])

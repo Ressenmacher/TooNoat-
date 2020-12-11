@@ -29,12 +29,14 @@
         <th>Text</th>
         <th>Date</th>
         <th>Time</th>
+        <th>Views</th>
       </tr>
       <tr>
         <td>{{ note.title }}</td>
         <td>{{ note.text }}</td>
         <td>{{ note.date }}</td>
         <td>{{ note.timestamp }}</td>
+        <td>{{ note.views }}</td>
       </tr>
     </table>
     {% if note.comments %} {% if note.comments|length > 0 %}

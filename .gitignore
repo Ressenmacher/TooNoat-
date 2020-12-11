@@ -1,0 +1,8 @@
+
+flask_app/.vscode/
+
+flask_app/__pycache__/
+
+flask_app/
+
+TooNoat-_flask/flask_note_app.db
