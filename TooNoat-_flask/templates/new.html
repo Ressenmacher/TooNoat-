@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="UNCC Notes App">
-        <title>UNCC Notes App - New Note</title>
+        <meta name="description" content="TooNoat+ App">
+        <title>TooNoat+ App - New Note</title>
         <!-- styles -->
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
@@ -15,7 +15,7 @@
             <a href="{{ url_for('logout') }}">Logout</a>
        </nav>
 
-        <h1>Welcome {{user}} to TooNoat+ !</h1>
+        <h1>Create a New Note:</h1>
         
         {% if note %}
             <form action="{{ url_for('update_note', note_id=note.id) }}" method="post">

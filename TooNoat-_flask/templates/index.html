@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="UNCC Notes App" />
-    <title>UNCC Notes App</title>
+    <meta name="description" content="TooNoat+ App" />
+    <title>TooNoat+ App</title>
     <!-- styles -->
     <link
       rel="stylesheet"
@@ -27,12 +27,20 @@
 
     <h2>Use this site to maintain and organize your notes.</h2>
 
-    <nav><a href="/notes"> My notes </a></nav>
+    <h3><nav><a href="/notes"> View Your Notes </a></nav></h3>
 
-    <h3>Course notes</h3>
+    <h3><nav><a href="{{ url_for('new_note') }}">New Note</a></nav></h3>
 
-    <h3>To Do</h3>
+    <h4>
+      <nav>
+      {% if user %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Sign In</a> ||
+        <a href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+      </nav>
+    </h4>
 
-    <h3>Work notes</h3>
   </body>
 </html>

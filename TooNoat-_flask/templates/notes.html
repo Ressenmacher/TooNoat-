@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="UNCC Notes App" />
-    <title>UNCC Notes App - View your Notes</title>
+    <meta name="description" content="TooNoat+ App" />
+    <title>TooNoat+ App - View your Notes</title>
     <!-- styles -->
     <link
       rel="stylesheet"
@@ -19,8 +19,7 @@
       <a href="{{ url_for('logout') }}">Logout</a>
 
       <form action="{{url_for('search_note') }}" method="GET">
-        "
-        <label for="site-search">Search the site:</label>
+        <label for="site-search">Search Your Notes:</label>
         <input
           type="search"
           id="site-search"
@@ -32,9 +31,9 @@
       </form>
     </nav>
 
-    <h1>Welcome {{user}} to TooNoat+!</h1>
+    <!-- <h1>Welcome {{user}} to TooNoat+!</h1> -->
 
-    <h1>Listing Notes</h1>
+    <h1>Your Notes:</h1>
 
     <table>
       <tr>
@@ -65,5 +64,10 @@
       </tr>
       {% endfor %}
     </table>
+    <h4>
+      <nav>
+        <a href="{{ url_for('new_note') }}">Add a New Note</a>
+      </nav>
+    </h4>
   </body>
 </html>
