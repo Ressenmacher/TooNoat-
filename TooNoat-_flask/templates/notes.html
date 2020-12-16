@@ -37,6 +37,7 @@
 
     <table>
       <tr>
+        <th>Index</th>
         <th>Title</th>
         <th>Date</th>
         <th>Time</th>
@@ -44,6 +45,7 @@
       </tr>
       {% for note in notes %}
       <tr>
+        <td>{{ note.id }}</td>
         <td>
           <a href="{{ url_for('get_note', note_id=note.id) }}"
             >{{ note.title }}</a>
